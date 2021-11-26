@@ -3,5 +3,5 @@ __pycache__
 /migrations
 db.sqlite3
 .env
-STATIC
-STATICFILES
+static/
+staticfiles/

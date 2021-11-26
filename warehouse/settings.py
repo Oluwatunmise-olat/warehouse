@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'warehouse.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'warehouse',
-        'USER': 'postgres',
-        'PASSWORD': 'olatunbosun',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'PORT': 5432,
-        'HOST': 'localhost'
+        'HOST': ''
     }
 }
 
