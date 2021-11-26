@@ -107,7 +107,8 @@ def create_admin_user(request):
         is_staff=True,
         is_worker=False,
 )
-    created_user.is_admin, 
+    created_user.set_password(serialized_data["password_one"])
+    created_user.save()
     serialized_data = UserSerializer(created_user)
     return Response({"message":"Worker User Created", "data":serialized_data.data}, status=status.HTTP_201_CREATED)
 
