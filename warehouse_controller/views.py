@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 from warehouse_controller.models import Activity, Inventory, TransactionLog
 from warehouse_controller.serializers import (
-    ActivitySerializer, ItemSerializer, TransactionSerializer, UserSerializer, CreateWorkerUserSerializer, ItemUpdateSerializer
+    ActivitySerializer, ItemSerializer, TransactionSerializer, UserSerializer, CreateUserSerializer, ItemUpdateSerializer
 )
 from warehouse_controller.pagination import ListLimitOffsetPagination
 from warehouse_controller.permissions import IsPermitted
@@ -76,7 +76,7 @@ class ItemCreateUpdateView(APIView):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, IsAdminUser])
 def create_worker_user(request):
-    serializer = CreateWorkerUserSerializer
+    serializer = CreateUserSerializer
     serialized_data = serializer(data=request.data)
     serialized_data.is_valid(raise_exception=True)
     serialized_data = serialized_data.data
@@ -86,10 +86,30 @@ def create_worker_user(request):
         email=serialized_data["email"],
         role = "Worker"
     )
-    created_user.set_password(serialized_data["password"])
+    created_user.set_password(serialized_data["password_one"])
     created_user.save()
-    serailized_data = UserSerializer(created_user)
-    return Response({"message":"Worker User Created", "data":serailized_data.data}, status=status.HTTP_201_CREATED)
+    serialized_data = UserSerializer(created_user)
+    return Response({"message":"Worker User Created", "data":serialized_data.data}, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def create_admin_user(request):
+    serializer = CreateUserSerializer
+    serialized_data = serializer(data=request.data)
+    serialized_data.is_valid(raise_exception=True)
+    serialized_data = serialized_data.data
+    created_user = USER.objects.create(
+        first_name=serialized_data["first_name"],
+        last_name=serialized_data["last_name"],
+        email=serialized_data["email"],
+        role = "Admin",
+        is_admin=True,
+        is_superuser=True,
+        is_staff=True,
+        is_worker=False,
+)
+    created_user.is_admin, 
+    serialized_data = UserSerializer(created_user)
+    return Response({"message":"Worker User Created", "data":serialized_data.data}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])

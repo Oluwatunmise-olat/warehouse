@@ -1,6 +1,6 @@
 ## WareHoure Management System Test
 
-#### Deployment Link: ''
+#### Deployment Link: https://simple-warehouse-project.herokuapp.com/
 
 #### API Documentation : https://documenter.getpostman.com/view/16498899/UVJbGHFn
 

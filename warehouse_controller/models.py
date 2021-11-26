@@ -18,7 +18,7 @@ class Inventory(BaseModel):
     # image = 
     price = models.FloatField(help_text="Price per item", default=0.0)
     count = models.PositiveIntegerField()
-    slug = models.SlugField(null=True)
+    slug = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return self.name

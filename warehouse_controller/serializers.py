@@ -47,7 +47,7 @@ class ItemUpdateSerializer(serializers.Serializer):
         return value
 
 
-class CreateWorkerUserSerializer(serializers.Serializer):
+class CreateUserSerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     email = serializers.EmailField()
