@@ -1,4 +1,4 @@
-## WareHoure Management System Test
+## WareHouse Management System Test
 
 #### Deployment Link: ''
 
